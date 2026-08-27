@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Public user profiles (No passwords stored here, safe for searching)
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if true;
+    }
+
+    // Friend requests & Game invites
+    match /friend_requests/{requestId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Friendships established between two users
+    match /friendships/{friendshipId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Game matchmaking rooms
+    match /game_rooms/{roomId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+  }
+}

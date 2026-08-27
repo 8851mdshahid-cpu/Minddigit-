@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "users": {
+      "title": "users",
+      "description": "Public user profiles with display name, avatar, presence, and score (no passwords).",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "username": { "type": "string" },
+        "name": { "type": "string" },
+        "avatar": { "type": "string" },
+        "coins": { "type": "number" },
+        "score": { "type": "number" },
+        "isOnline": { "type": "boolean" },
+        "lastSeen": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "username", "name", "avatar"]
+    },
+    "friend_requests": {
+      "title": "friend_requests",
+      "description": "Direct friend requests and game room invites sent between users.",
+      "type": "object",
+      "properties": {
+        "fromUserId": { "type": "string" },
+        "fromUsername": { "type": "string" },
+        "fromName": { "type": "string" },
+        "fromAvatar": { "type": "string" },
+        "toUsername": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "rejected"] },
+        "type": { "type": "string", "enum": ["friend_request", "room_invite", "game_challenge"] },
+        "roomCode": { "type": "string" },
+        "gameType": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "expiresInSeconds": { "type": "number" }
+      },
+      "required": ["fromUsername", "toUsername", "status"]
+    },
+    "friendships": {
+      "title": "friendships",
+      "description": "Established mutual friendships between two players.",
+      "type": "object",
+      "properties": {
+        "user1": { "type": "string" },
+        "user2": { "type": "string" },
+        "user1Name": { "type": "string" },
+        "user2Name": { "type": "string" },
+        "user1Avatar": { "type": "string" },
+        "user2Avatar": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["user1", "user2"]
+    },
+    "game_rooms": {
+      "title": "game_rooms",
+      "description": "Multiplayer live matchmaking rooms for 1v1 duels and 3-player lobbies.",
+      "type": "object",
+      "properties": {
+        "roomCode": { "type": "string" },
+        "gameType": { "type": "string" },
+        "hostUsername": { "type": "string" },
+        "hostName": { "type": "string" },
+        "hostAvatar": { "type": "string" },
+        "players": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "status": { "type": "string", "enum": ["waiting", "playing", "finished"] },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["roomCode", "hostUsername", "status"]
+    }
+  }
+}

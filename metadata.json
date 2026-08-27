@@ -1,0 +1,6 @@
+{
+  "name": "Minddigit",
+  "description": "Minddigit - Light UI puzzle and number guessing game with online, offline, and computer modes.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
